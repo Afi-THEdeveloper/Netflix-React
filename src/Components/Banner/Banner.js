@@ -5,14 +5,17 @@ import { ApiKey, imageUrl } from "../../constants/Constants";
 
 function Banner() {
   const [movie, setMovie] = useState([]);
+  const [count,setCount] = useState(0)
   useEffect(() => {
+    setCount(prevCount=> prevCount+1)
+    console.log(count)     
     axios
       .get(`trending/all/week?api_key=${ApiKey}&language=en-US`)
       .then((response) => {
         console.log(response.data.results[2]);
-        setMovie(response.data.results[2]);
+        setMovie(response.data.results[count]);
       });
-  }, []);
+  }, []); 
 
   return (
     <div
